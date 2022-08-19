@@ -1,17 +1,31 @@
+require('dotenv').config();
 var express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
 const compression = require('compression')
 const helmet = require('helmet');
+const mongoString = process.env.DATABASE_URL;
 
+mongoose.connect(mongoString);
+const database = mongoose.connection;
 
-var app = express();
+database.on('error', (error) => {
+    console.log(error)
+})
 
-app.use(helmet)
-app.use(compression)
+database.once('connected', () => {
+    console.log('Database Connected');
+})
+const app = express();
+app.use(cors())
+app.use(helmet())
+app.use(compression())
+app.use(express.json());
 
+const routes = require('./routes/routes');
 
-function error(status, msg) {
-  var err = new Error(msg);
-  err.status = status;
-  return err;
-}
+app.use('/api', routes)
 
+app.listen(3000, () => {
+    console.log(`Server Started at ${3000}`)
+})
