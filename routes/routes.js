@@ -4,13 +4,16 @@ const router = express.Router();
 
 //Post Method
 router.post('/post', async (req, res) => {
-    const data = new Model({
-        name: req.body.name,
-        age: req.body.age
-    })
+    // const data = new Model({
+    //     name: req.body.name,
+    //     age: req.body.age
+    // })
+
 
     try {
-        const dataToSave = await data.save();
+        //const dataToSave = await data.save();
+        const dataToSave = req.body
+        console.log(dataToSave)
         res.status(200).json(dataToSave)
     }
     catch (error) {
@@ -19,7 +22,7 @@ router.post('/post', async (req, res) => {
 })
 
 //Get all Method
-router.get('/getAll', async (req, res) => {
+router.get('/get', async (req, res) => {
     try {
         const data = await Model.find();
         res.json(data)
