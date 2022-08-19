@@ -1,0 +1,16 @@
+{
+  "name": "jaden-back",
+  "version": "1.0.0",
+  "description": "jaden-nuxt backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jaden Chant",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.18.1",
+    "helmet": "^5.1.1"
+  }
+}
