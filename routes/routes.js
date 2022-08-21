@@ -1,5 +1,6 @@
 const express = require('express');
 const Model = require('../models/model');
+const healthdata = require('../functions/healthdata');
 const router = express.Router();
 
 //Post Method
@@ -13,7 +14,8 @@ router.post('/post', async (req, res) => {
     try {
         //const dataToSave = await data.save();
         const dataToSave = req.body
-        console.log(dataToSave)
+        healthdata.parceHealthData(datatoSave)
+        //console.log(dataToSave)
         res.status(200).json(dataToSave)
     }
     catch (error) {
