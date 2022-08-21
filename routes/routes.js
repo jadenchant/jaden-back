@@ -1,22 +1,40 @@
 const express = require('express');
-const Model = require('../models/model');
-const healthdata = require('../functions/healthdata');
+const Flights = require('../models/Flights')
+const Steps = require('../models/Steps')
+const Distance = require('../models/Distance')
 const router = express.Router();
 
 //Post Method
 router.post('/post', async (req, res) => {
-    // const data = new Model({
-    //     name: req.body.name,
-    //     age: req.body.age
-    // })
+    const data = req.body.data.metrics
+    const flights = data[0]
+    const steps = data[1]
+    const distance = data[2]
+
+    const flightsData = new Flights({
+        date: Date(),
+        flights: flights.data[0].qty,
+        units: flights.units
+    })
+
+    const stepsData = new Steps({
+        date: Date(),
+        steps: steps.data[0].qty,
+        units: steps.units
+    })
+
+    const distanceData = new Distance({
+        date: Date(),
+        distance: distance.data[0].qty,
+        units: distance.units
+    })
 
 
     try {
-        //const dataToSave = await data.save();
-        const dataToSave = req.body
-        healthdata.parceHealthData(datatoSave)
-        //console.log(dataToSave)
-        res.status(200).json(dataToSave)
+        const flightsSave = await flightsData.save();
+        const stepsSave = await stepsData.save();
+        const distanceSave = await distanceData.save();
+        res.status(200).json(flightsSave + stepsSave + distanceSave);
     }
     catch (error) {
         res.status(400).json({ message: error.message })
