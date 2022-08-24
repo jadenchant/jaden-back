@@ -34,7 +34,7 @@ router.post('/post', async (req, res) => {
         const flightsSave = await flightsData.save();
         const stepsSave = await stepsData.save();
         const distanceSave = await distanceData.save();
-        res.status(200).json(flightsSave + stepsSave + distanceSave);
+        res.status(200).json([flightsSave, stepsSave, distanceSave]);
     }
     catch (error) {
         res.status(400).json({ message: error.message })
@@ -42,9 +42,9 @@ router.post('/post', async (req, res) => {
 })
 
 //Get all Method
-router.get('/get', async (req, res) => {
+router.get('/getFlights', async (req, res) => {
     try {
-        const data = await Model.find();
+        const data = await Flights.find();
         res.json(data)
     }
     catch (error) {
@@ -60,36 +60,6 @@ router.get('/getOne/:id', async (req, res) => {
     }
     catch (error) {
         res.status(500).json({ message: error.message })
-    }
-})
-
-//Update by ID Method
-router.patch('/update/:id', async (req, res) => {
-    try {
-        const id = req.params.id;
-        const updatedData = req.body;
-        const options = { new: true };
-
-        const result = await Model.findByIdAndUpdate(
-            id, updatedData, options
-        )
-
-        res.send(result)
-    }
-    catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-})
-
-//Delete by ID Method
-router.delete('/delete/:id', async (req, res) => {
-    try {
-        const id = req.params.id;
-        const data = await Model.findByIdAndDelete(id)
-        res.send(`Document with ${data.name} has been deleted..`)
-    }
-    catch (error) {
-        res.status(400).json({ message: error.message })
     }
 })
 
