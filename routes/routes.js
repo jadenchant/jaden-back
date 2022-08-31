@@ -12,19 +12,19 @@ router.post('/post', async (req, res) => {
     const distance = data[2]
 
     const flightsData = new Flights({
-        date: Date(),
+        date: flights.data[0].date,
         flights: flights.data[0].qty,
         units: flights.units
     })
 
     const stepsData = new Steps({
-        date: Date(),
+        date: steps.data[0].date,
         steps: steps.data[0].qty,
         units: steps.units
     })
 
     const distanceData = new Distance({
-        date: Date(),
+        date: distance.data[0].date,
         distance: distance.data[0].qty,
         units: distance.units
     })
@@ -45,6 +45,36 @@ router.post('/post', async (req, res) => {
 router.get('/getFlights', async (req, res) => {
     try {
         const data = await Flights.find();
+        res.json(data)
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
+
+router.get('/getFlightsPrev', async (req, res) => {
+    try {
+        const data = await Flights.getFlightsPrev();
+        res.json(data)
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
+
+router.get('/getStepsPrev', async (req, res) => {
+    try {
+        const data = await Steps.getStepsPrev();
+        res.json(data)
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
+
+router.get('/getDistancePrev', async (req, res) => {
+    try {
+        const data = await Distance.getDistancePrev();
         res.json(data)
     }
     catch (error) {
