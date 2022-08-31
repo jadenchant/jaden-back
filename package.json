@@ -4,7 +4,8 @@
   "description": "jaden-nuxt backend",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "deploy": "gcloud app deploy"
   },
   "author": "Jaden Chant",
   "license": "ISC",
