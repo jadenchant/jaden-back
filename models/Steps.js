@@ -1,34 +1,35 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const stepsSchema = new mongoose.Schema({
+const stepsSchema = new mongoose.Schema(
+  {
     date: {
-        required: true,
-        type: Date
+      required: true,
+      type: Date,
     },
     steps: {
-        requiered: true,
-        type: Number
+      requiered: true,
+      type: Number,
     },
     units: {
-        required: true,
-        type: String
-    }
-},
-{
+      required: true,
+      type: String,
+    },
+  },
+  {
     statics: {
-        getStepsPrev(){
-            const last = new Date()
-            last.setDate(last.getDate()-2)
-            const now = new Date()
-            return this.find({
-                date: {
-                    $gt: last,
-                    $lt: now
-                }
-            })
-        }
-    }
-}
-)
+      getStepsPrev() {
+        const last = new Date();
+        last.setDate(last.getDate() - 2);
+        const now = new Date();
+        return this.find({
+          date: {
+            $gt: last,
+            $lt: now,
+          },
+        });
+      },
+    },
+  }
+);
 
-module.exports = mongoose.model('Steps', stepsSchema)
+module.exports = mongoose.model("Steps", stepsSchema);

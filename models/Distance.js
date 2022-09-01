@@ -1,34 +1,35 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const distanceSchema = new mongoose.Schema({
+const distanceSchema = new mongoose.Schema(
+  {
     date: {
-        required: true,
-        type: Date
+      required: true,
+      type: Date,
     },
     distance: {
-        requiered: true,
-        type: Number
+      requiered: true,
+      type: Number,
     },
     units: {
-        required: true,
-        type: String
-    }
-},
-{
+      required: true,
+      type: String,
+    },
+  },
+  {
     statics: {
-        getDistancePrev(){
-            const last = new Date()
-            last.setDate(last.getDate()-2)
-            const now = new Date()
-            return this.find({
-                date: {
-                    $gt: last,
-                    $lt: now
-                }
-            })
-        }
-    }
-}
-)
+      getDistancePrev() {
+        const last = new Date();
+        last.setDate(last.getDate() - 2);
+        const now = new Date();
+        return this.find({
+          date: {
+            $gt: last,
+            $lt: now,
+          },
+        });
+      },
+    },
+  }
+);
 
-module.exports = mongoose.model('Distance', distanceSchema)
+module.exports = mongoose.model("Distance", distanceSchema);

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "deploy": "gcloud app deploy"
+    "deploy": "gcloud app deploy",
+    "prettier": "prettier --write ."
   },
   "author": "Jaden Chant",
   "license": "ISC",
