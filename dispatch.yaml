@@ -1,0 +1,3 @@
+dispatch:
+  - url: "api.jadenchant.com/*"
+    service: default
