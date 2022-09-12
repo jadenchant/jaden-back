@@ -2,6 +2,7 @@ const express = require("express");
 const Flights = require("../models/Flights");
 const Steps = require("../models/Steps");
 const Distance = require("../models/Distance");
+const round = require("../functions/round");
 const router = express.Router();
 
 //Post Method
@@ -25,7 +26,7 @@ router.post("/post", async (req, res) => {
 
   const distanceData = new Distance({
     date: distance.data[0].date,
-    distance: distance.data[0].qty,
+    distance: round(distance.data[0].qty),
     units: distance.units,
   });
 
